@@ -1,0 +1,241 @@
+@import "tailwindcss";
+
+:root {
+  --eden-peach: #f7d9c6;
+  --eden-peach-mid: #fbe7da;
+  --eden-cream: #fdf0e7;
+  --eden-ink: #1d1a1c;
+  --eden-muted: #5c5156;
+  --eden-muted-2: #8a7f83;
+  --eden-accent: #f39419;
+  --eden-fav: #ff4d5e;
+  --ease-layout: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: "Urbanist", -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--eden-ink);
+    background-color: var(--eden-peach);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    color: var(--eden-ink);
+    background: linear-gradient(
+      to bottom,
+      #f7d9c6 0px,
+      #f7d9c6 115vh,
+      #fbe7da 175vh,
+      #fdf0e7 100%
+    );
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: rgba(243, 148, 25, 0.24);
+    color: #1d1a1c;
+  }
+}
+
+.font-editorial {
+  font-family: "Gilda Display", Georgia, serif;
+}
+
+.font-sans-eden {
+  font-family: "Urbanist", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Custom desktop pointer cursor hiding only when active */
+html.eden-custom-cursor-active,
+html.eden-custom-cursor-active * {
+  cursor: none !important;
+}
+
+/* Monumental hero title with vertical dissolve into the landscape */
+.eden-hero-title-word {
+  display: inline-block;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.97) 0%,
+    rgba(255, 255, 255, 0.86) 36%,
+    rgba(255, 255, 255, 0.16) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  will-change: transform, opacity;
+}
+
+/* Animated nav link underline wipe */
+.eden-nav-link {
+  position: relative;
+}
+
+.eden-nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 1.5px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 420ms var(--ease-reveal);
+}
+
+.eden-nav-link:hover::after,
+.eden-nav-link:focus-visible::after,
+.eden-nav-link[data-active="true"]::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+
+/* Volumetric cloud continuous animations */
+@keyframes cloudDriftFront {
+  0% {
+    transform: translate3d(-2.5%, 0%, 0) scale(1.06);
+  }
+  100% {
+    transform: translate3d(2.5%, 0%, 0) scale(1.06);
+  }
+}
+
+@keyframes cloudDriftRear {
+  0% {
+    transform: scaleX(-1) translate3d(-3%, -2%, 0) scale(1.1);
+  }
+  100% {
+    transform: scaleX(-1) translate3d(3%, 2%, 0) scale(1.1);
+  }
+}
+
+@keyframes cloudDriftUpper {
+  0% {
+    transform: scaleY(-1) translate3d(-2%, 0%, 0) scale(1.08);
+  }
+  100% {
+    transform: scaleY(-1) translate3d(2.5%, 1.5%, 0) scale(1.08);
+  }
+}
+
+.eden-cloud-front {
+  animation: cloudDriftFront 26s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.eden-cloud-rear {
+  animation: cloudDriftRear 34s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.eden-cloud-upper {
+  animation: cloudDriftUpper 30s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.eden-cloud-paused .eden-cloud-front,
+.eden-cloud-paused .eden-cloud-rear,
+.eden-cloud-paused .eden-cloud-upper {
+  animation-play-state: paused;
+}
+
+/* Cloud bank upper soft feather mask */
+.eden-cloud-bank-mask {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.32) 22%,
+    rgba(0, 0, 0, 0.85) 54%,
+    rgba(0, 0, 0, 1) 82%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.32) 22%,
+    rgba(0, 0, 0, 0.85) 54%,
+    rgba(0, 0, 0, 1) 82%
+  );
+}
+
+.eden-cloud-upper-mask {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.85) 45%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 0.85) 45%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+/* Favourite heart pop animation */
+@keyframes heartPop {
+  0% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.35);
+  }
+  72% {
+    transform: scale(0.92);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.eden-heart-pop {
+  animation: heartPop 420ms var(--ease-reveal);
+}
+
+/* Property card hover polish */
+.eden-stay-card {
+  transition: transform 520ms var(--ease-reveal), box-shadow 520ms var(--ease-reveal);
+}
+
+.eden-stay-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px rgba(48, 28, 22, 0.22);
+}
+
+.eden-stay-card-img {
+  transition: transform 1200ms var(--ease-reveal);
+  will-change: transform;
+}
+
+.eden-stay-card:hover .eden-stay-card-img {
+  transform: scale(1.07);
+}
+
+/* Reduced motion compliance */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .eden-cloud-front,
+  .eden-cloud-rear,
+  .eden-cloud-upper,
+  .eden-heart-pop {
+    animation: none !important;
+  }
+
+  .eden-stay-card,
+  .eden-stay-card-img,
+  .eden-nav-link::after {
+    transition-duration: 0.01ms !important;
+  }
+}

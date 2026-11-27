@@ -1,0 +1,8 @@
+{
+  "name": "Rotas do Éden",
+  "description": "Experiência cinematográfica de viagens originária de São Tomé e Príncipe — estadias extraordinárias, destinos atlânticos, experiências autênticas e comunidade.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
